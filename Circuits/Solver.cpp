@@ -4,16 +4,16 @@
 
 Solver::Solver()
 {
-	elements = new vector<Element>;
-	voltageSources = new vector<Element>;
+	elements = new vector<Element*>;
+	voltageSources = new vector<Element*>;
 }
 
-vector<Element>* Solver::getElements()
+vector<Element*>* Solver::getElementsPtr()
 {
 	return elements;
 }
 
-vector<Element>* Solver::getVSs()
+vector<Element*>* Solver::getVSsPtr()
 {
 	return voltageSources;
 }

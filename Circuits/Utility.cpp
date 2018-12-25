@@ -43,33 +43,73 @@ void Utility::load(string path, vector<Element>* elements, vector<Element>* volt
 {
 
 	cout << path;
+	
+	float frequency;
 
 	ifstream myfile(path);
 	//myfile.open(Utility::fileDialog());
-	if (myfile.is_open()) {
-
-		float frequency;
+	if (myfile.is_open()) {		
 
 		string line;
+		string words[10];
+
 
 		for (int i = 0; getline(myfile, line); i++) {
 			cout << line << "\n";
 
 			if (i == 0) frequency = stof(line);
-
-
-			string word;
-			istringstream stream(line);
-			for (int j = 0; stream >> word; j++) {
-
+			else {
+				string w;
+				istringstream stream(line);
+				for (int j = 0; stream >> w; j++) {
+					words[j] = w;
+				}
 			}
-
 		}
+
+		translateLine(words, frequency);
 
 		myfile.close();
 	}
 }
 
+void Utility::translateLine(string words[], float freq) {
+
+	Element* e = new Element(words[0], stof(words[1]), stof(words[2]));
+
+	if (words[0].at(0) == 'R') {
+		e->initResistor(stof(words[3]), freq);
+	}
+	else if (words[0].at(0) == 'C') {
+		e->initCapacitor(stof(words[3]), freq);
+	}
+	else if (words[0].at(0) == 'L') {
+		e->initInductor(stof(words[3]), freq);
+	}
+	else if (words[0].at(0) == 'V') {
+		e->initVS(stof(words[3]), stof(words[4]), freq);
+	}
+	else if (words[0].at(0) == 'I') {
+		e->initCS(stof(words[3]), stof(words[4]), freq);
+	}
+	else if (words[0].at(0) == '_' || 
+		words[0].at(0) == '-') { // Depends on current.
+		if (words[0].at(1) == 'V') {
+			e->initCCVS(words[4], stof(words[3]));
+		}
+		else if (words[0].at(1) == 'I') {
+			e->initCCCS(words[4], stof(words[3]));
+		}
+	}
+	else if (words[0].at(0) == '=') { // Depends on voltage.
+		if (words[0].at(1) == 'V') {
+			e->initVCVS(stof(words[4]), stof(words[5]), stof(words[3]));
+		}
+		else if (words[0].at(1) == 'I') {
+			e->initVCCS(stof(words[4]), stof(words[5]), stof(words[3]));
+		}
+	}
+}
 
 Utility::~Utility()
 {

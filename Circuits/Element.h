@@ -15,7 +15,7 @@ class Element // Or Branch
 	ElementType type;
 	complex<float> value;
 
-	Node node1, node2;
+	int node1, node2;
 
 
 	//--------------------- Voltage Controlled ------------------
@@ -32,7 +32,8 @@ class Element // Or Branch
 
 
 public:
-	Element(string ID, Node node1, Node node2);
+	//Element();
+	Element(string ID, int node1, int node2);
 
 	void initResistor(float R, float frequency);
 	void initCapacitor(float C, float frequency);
@@ -41,8 +42,8 @@ public:
 	void initCS(float I, float phi, float frequency); // Current source
 
 
-	void initVCVS(int firstControllingNodeID, int secondControllingNodeID, float factor);// Voltage controlled voltage source
-	void initVCCS(int firstControllingNodeID, int secondControllingNodeID, float factor);// Voltage controlled current source
+	void initVCVS(int firstControllingNode, int secondControllingNode, float factor);// Voltage controlled voltage source
+	void initVCCS(int firstControllingNode, int secondControllingNode, float factor);// Voltage controlled current source
 	void initCCVS(string controllingElementID, float factor);							  // Current controlled voltage source
 	void initCCCS(string controllingElementID, float factor);							  // Current controlled current source
 

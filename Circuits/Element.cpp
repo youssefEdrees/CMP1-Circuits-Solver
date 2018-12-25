@@ -4,11 +4,15 @@
 
 
 
-Element::Element(string ID, Node node1, Node node2) : ID(ID), node1(node1), node2(node2)
+Element::Element(string ID, int node1, int node2) : ID(ID), node1(node1), node2(node2)
 {
 	
 }
 
+//Element::Element()
+//{
+//
+//}
 
 Element::~Element()
 {
@@ -40,7 +44,7 @@ void Element::initCS(float I, float phi, float frequency) {
 	value = (I*cos(phi), I*sin(phi));
 }
 
-void Element::initVCVS(int firstControllingNodeID, int secondControllingNodeID, float factor)
+void Element::initVCVS(int firstControllingNode, int secondControllingNode, float factor)
 {
 	type = ElementType::VCVS;
 
@@ -49,7 +53,7 @@ void Element::initVCVS(int firstControllingNodeID, int secondControllingNodeID, 
 	this->factor = factor;
 }
 
-void Element::initVCCS(int firstControllingNodeID, int secondControllingNodeID, float factor)
+void Element::initVCCS(int firstControllingNode, int secondControllingNode, float factor)
 {
 	type = ElementType::VCCS;
 

@@ -7,14 +7,14 @@ using namespace std;
 class Solver
 {
 
-	vector<Element> * elements;
-	vector<Element> * voltageSources;
+	vector<Element*> * elements;
+	vector<Element*> * voltageSources;
 
 public:
 	Solver();
 
-	vector<Element> * getElements();
-	vector<Element> * getVSs();
+	vector<Element*> * getElementsPtr();
+	vector<Element*> * getVSsPtr();
 
 	//void displaySolution();
 
