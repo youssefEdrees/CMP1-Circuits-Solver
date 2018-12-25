@@ -18,6 +18,10 @@ Element::~Element()
 {
 
 }
+ElementType Element::getType() {
+	return type;
+	
+}
 
 void Element::initResistor(float R, float frequency) {
 	type = ElementType::R;

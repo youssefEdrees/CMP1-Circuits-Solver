@@ -48,7 +48,7 @@ public:
 	void initCCCS(string controllingElementID, float factor);							  // Current controlled current source
 
 	complex<float> getCurrent();
-
+	ElementType getType();
 	~Element();
 };
 
