@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Solver.h"
-
+#include <cmath>
 
 Solver::Solver()
 {
@@ -23,20 +23,16 @@ Element * Solver::getVSs(int size)
 	return voltageSources[0];
 }
 
-float Solver::SumOfZConnected(int node) {
-	complex<float>sum;
+complex<float> Solver::SumOfZConnected(int node) {
+	complex<float>sum=(0,0);
 	for (int i = 0; i < elementsCount;i++) {
 		if (isPassive(i)) {
 			if (elements[i]->getFirstNode() == node)
-				sum += 1 / elements[i]->getValue();
-		
+				sum += pow(elements[i]->getValue(),-1);
 		}
 		
 	}
-
-
-
-
+	return sum;
 }
 
 int & Solver::getElementsCountByRef() {
@@ -46,27 +42,35 @@ int & Solver::getVCByRef() {
 	return VSCount;
 }
 
+complex<float> Solver::SumOfZConnectedToX(int node1, int node2) {
+	complex<float>sum = (0, 0);
+	for (int i = 0; i < elementsCount; i++) {
+		if (isPassive(i)) {
+			if ((elements[i]->getFirstNode() == node1&& elements[i]->getSecondNode() == node2)
+				|| (elements[i]->getFirstNode() == node2 && elements[i]->getSecondNode() == node1))
+				sum += pow(elements[i]->getValue(), -1);
+		}
+
+	}
+	return sum;
+
+}
 
 void Solver::firstSquare() {
 	int nodesCount = 0;
 	for (int i = 0; i < nodesCount; i++) {
 		for (int t = 0; t < nodesCount; t++) {
 			if (i == t) {
-				
-				
-				
+				complex<float> sum =SumOfZConnected(i);
+				mat(i, i) = sum;
 			}
-		
-		
-		
-		
+			else {
+				complex<float> sum = SumOfZConnectedToX(i,t);
+				mat(i, t) = sum;
+			}
 		}
 	
 	}
-
-
-
-
 }
 
 bool Solver::isPassive(int i) {

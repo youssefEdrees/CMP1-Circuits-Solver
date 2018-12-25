@@ -13,7 +13,7 @@ class Solver
 	Element * voltageSources[MAX];
 	int elementsCount;
 	int VSCount;
-
+	MatrixXcf mat;
 public:
 	Solver();
 
@@ -21,9 +21,13 @@ public:
 	Element * getVSs(int size);
 	void execute();
 	void firstSquare();
-	float SumOfZConnected(int node);
+	complex<float>SumOfZConnected(int node);
+
+	complex<float>SumOfZConnectedToX(int node1, int node2);
 	void secondSquare();
 	void thirdSquare();
+	int & getElementsCountByRef();
+	int & getVCByRef();
 	int getElementsCount();
 	//void displaySolution();
 	bool isPassive(int i);
