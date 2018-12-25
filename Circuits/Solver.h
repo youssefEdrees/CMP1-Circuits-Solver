@@ -1,23 +1,30 @@
 #pragma once
 #include <vector>
 #include "Element.h"
-
+#include "eigen/Eigen/Dense"
+using namespace Eigen;
 using namespace std;
-
+#define MAX 100
 class Solver
 {
 
-	vector<Element> * elements;
-	vector<Element> * voltageSources;
-
+	Element * elements[MAX];
+	Element * voltageSources[MAX];
+	int elementsCount;
+	int VSCount;
 public:
 	Solver();
 
-	vector<Element> * getElements();
-	vector<Element> * getVSs();
-
+	Element * getElements(int size);
+	Element * getVSs(int size);
+	void execute();
+	void firstSquare();
+	float SumOfZConnected(int node);
+	void secondSquare();
+	void thirdSquare();
+	int getElementsCount();
 	//void displaySolution();
-
+	bool isPassive(int i);
 	~Solver();
 };
 
