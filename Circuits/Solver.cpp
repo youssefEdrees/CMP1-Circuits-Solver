@@ -66,6 +66,11 @@ bool Solver::isPassive(int i) {
 		return false;
 }
 
+int & Solver::getNumOfNodesByRef()
+{
+	return numOfNodes;
+}
+
 int Solver::getElementsCount() {
 	int passiveCount = 0;
 	for(int i=0; i<elementsCount;i++)
