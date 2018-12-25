@@ -39,7 +39,12 @@ Utility::Utility()
 //	return buffer;
 //}
 
-void Utility::load(string path, vector<Element>* elements, vector<Element>* voltageSources)
+void Utility::load(string path,
+	int& numOfNodes,
+	Element ** elements,
+	int& sizeOfElements,
+	Element ** voltageSources,
+	int& sizeOfVoltageSources)
 {
 
 	cout << path;
@@ -53,11 +58,12 @@ void Utility::load(string path, vector<Element>* elements, vector<Element>* volt
 		string line;
 		string words[10];
 
-
-		for (int i = 0; getline(myfile, line); i++) {
+		int i;
+		for (i = 0; getline(myfile, line); i++) {
 			cout << line << "\n";
 
-			if (i == 0) frequency = stof(line);
+			if (i == 0) numOfNodes = stof(line);
+			else if (i == 1) frequency = stof(line);
 			else {
 				string w;
 				istringstream stream(line);
@@ -67,13 +73,27 @@ void Utility::load(string path, vector<Element>* elements, vector<Element>* volt
 			}
 		}
 
-		translateLine(words, frequency);
+		if (i > 1)
+			translateLine(words, 
+				frequency, 
+				elements, 
+				sizeOfElements, 
+				voltageSources, 
+				sizeOfVoltageSources);
 
 		myfile.close();
 	}
 }
 
-void Utility::translateLine(string words[], float freq) {
+void Utility::translateLine(string words[], 
+	float freq, 
+	Element ** elements,
+	int& sizeOfElements,
+	Element ** voltageSources,
+	int& sizeOfVoltageSources) {
+
+	sizeOfElements = 0;
+	sizeOfVoltageSources = 0;
 
 	Element* e = new Element(words[0], stof(words[1]), stof(words[2]));
 
@@ -88,6 +108,7 @@ void Utility::translateLine(string words[], float freq) {
 	}
 	else if (words[0].at(0) == 'V') {
 		e->initVS(stof(words[3]), stof(words[4]), freq);
+		voltageSources[sizeOfVoltageSources++] = e;
 	}
 	else if (words[0].at(0) == 'I') {
 		e->initCS(stof(words[3]), stof(words[4]), freq);
@@ -96,6 +117,7 @@ void Utility::translateLine(string words[], float freq) {
 		words[0].at(0) == '-') { // Depends on current.
 		if (words[0].at(1) == 'V') {
 			e->initCCVS(words[4], stof(words[3]));
+			voltageSources[sizeOfVoltageSources++] = e;
 		}
 		else if (words[0].at(1) == 'I') {
 			e->initCCCS(words[4], stof(words[3]));
@@ -104,11 +126,15 @@ void Utility::translateLine(string words[], float freq) {
 	else if (words[0].at(0) == '=') { // Depends on voltage.
 		if (words[0].at(1) == 'V') {
 			e->initVCVS(stof(words[4]), stof(words[5]), stof(words[3]));
+			voltageSources[sizeOfVoltageSources++] = e;
 		}
 		else if (words[0].at(1) == 'I') {
 			e->initVCCS(stof(words[4]), stof(words[5]), stof(words[3]));
 		}
 	}
+
+	elements[sizeOfElements++] = e;
+
 }
 
 Utility::~Utility()

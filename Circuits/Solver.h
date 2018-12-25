@@ -8,10 +8,12 @@ using namespace std;
 class Solver
 {
 
+	int numOfNodes;
 	Element * elements[MAX];
 	Element * voltageSources[MAX];
 	int elementsCount;
 	int VSCount;
+
 public:
 	Solver();
 
@@ -25,6 +27,7 @@ public:
 	int getElementsCount();
 	//void displaySolution();
 	bool isPassive(int i);
+	int& getNumOfNodesByRef();
 	~Solver();
 };
 
