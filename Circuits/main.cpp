@@ -30,7 +30,7 @@ int main()
 			s->getElementsCountByRef(), 
 			s->getVSs(), 
 			s->getVCByRef());
-
+		s->execute();
 		/// 3- Instanciate a new solver.
 		if (s != NULL) delete s;
 		//s = new Solver();

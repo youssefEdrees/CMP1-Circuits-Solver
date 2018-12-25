@@ -31,11 +31,8 @@ complex<float> Solver::SumOfZConnected(int node) {
 	complex<float>sum=(0,0);
 	for (int i = 0; i < elementsCount;i++) {
 		if (isPassive(i)) {
-			if (elements[i]->getFirstNode() == node || elements[i]->getSecondNode() == node)
-			{
-			
-				sum += pow(elements[i]->getValue(), -1);
-			}
+			if (elements[i]->getFirstNode() == node)
+				sum += pow(elements[i]->getValue(),-1);
 		}
 		
 	}
@@ -64,15 +61,8 @@ complex<float> Solver::SumOfZConnectedToX(int node1, int node2) {
 }
 
 void Solver::firstSquare() {
-	mat.resize(3,3);
-	
-	for (int i = 0; i < elementsCount; i++) {
-		cout << elements[i]->getValue()<<"any"<<endl;
-	}
-
 	int nodesCount = numOfNodes;
-	complex<float> x = (0,0);
-	mat(0, 0) = x ;
+	mat(0, 0) = 0;
 	for (int i = 0; i < nodesCount; i++) {
 		for (int t = 0; t < nodesCount; t++) {
 			if (i == t) {
@@ -80,7 +70,6 @@ void Solver::firstSquare() {
 				mat(i, i) = sum;
 			}
 			else {
-				
 				complex<float> sum = SumOfZConnectedToX(i,t);
 				mat(i, t) = sum;
 			}
