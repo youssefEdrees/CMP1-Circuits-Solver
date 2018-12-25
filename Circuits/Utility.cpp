@@ -47,6 +47,9 @@ void Utility::load(string path,
 	int& sizeOfVoltageSources)
 {
 
+	sizeOfElements = 0;
+	sizeOfVoltageSources = 0;
+
 	cout << path;
 	
 	float frequency;
@@ -71,15 +74,17 @@ void Utility::load(string path,
 					words[j] = w;
 				}
 			}
+
+			if (i > 1)
+				translateLine(words, 
+					frequency, 
+					elements, 
+					sizeOfElements, 
+					voltageSources, 
+					sizeOfVoltageSources);
 		}
 
-		if (i > 1)
-			translateLine(words, 
-				frequency, 
-				elements, 
-				sizeOfElements, 
-				voltageSources, 
-				sizeOfVoltageSources);
+		//cout << "\ns = " << sizeOfElements << '\n';
 
 		myfile.close();
 	}
@@ -91,9 +96,6 @@ void Utility::translateLine(string words[],
 	int& sizeOfElements,
 	Element ** voltageSources,
 	int& sizeOfVoltageSources) {
-
-	sizeOfElements = 0;
-	sizeOfVoltageSources = 0;
 
 	Element* e = new Element(words[0], stof(words[1]), stof(words[2]));
 

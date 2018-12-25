@@ -31,6 +31,8 @@ int main()
 			s->getVSs(), 
 			s->getVCByRef());
 
+		//cout << s->getElementsCountByRef();
+
 		/// 3- Instanciate a new solver.
 		if (s != NULL) delete s;
 		//s = new Solver();
