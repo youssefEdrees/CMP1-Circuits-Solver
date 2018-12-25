@@ -2,15 +2,20 @@
 #include <vector>
 #include "Element.h"
 
+using namespace std;
+
 class Solver
 {
-	float omega;
-	//vector<Element> elements;
+
+	vector<Element> * elements;
+	vector<Element> * voltageSources;
 
 public:
-	Solver(float omega);
+	Solver();
 
-	float getOmega();
+	vector<Element> * getElements();
+	vector<Element> * getVSs();
+
 	//void displaySolution();
 
 	~Solver();
