@@ -17,15 +17,15 @@ class Solver
 public:
 	Solver();
 
-	Element * getElements(int size);
-	Element * getVSs(int size);
+	Element ** getElements();
+	Element ** getVSs();
 	void execute();
 	void firstSquare();
 	complex<float>SumOfZConnected(int node);
 
 	complex<float>SumOfZConnectedToX(int node1, int node2);
-	void secondSquare();
-	void thirdSquare();
+	//void secondSquare();
+	//void thirdSquare();
 	int & getElementsCountByRef();
 	int & getVCByRef();
 	int getElementsCount();

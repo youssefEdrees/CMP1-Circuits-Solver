@@ -26,8 +26,10 @@ int main()
 		cin >> path;
 		Utility::load(path, 
 			s->getNumOfNodesByRef(), 
-			s->getElements(), 
-			s->getVSs());
+			s->getElements(),
+			s->getElementsCountByRef(), 
+			s->getVSs(), 
+			s->getVCByRef());
 
 		/// 3- Instanciate a new solver.
 		if (s != NULL) delete s;
