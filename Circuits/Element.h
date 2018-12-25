@@ -3,6 +3,7 @@
 #include "Node.h"
 #include <complex>
 #include <string>
+#include "Solver.h"
 
 using namespace std;
 
@@ -22,13 +23,13 @@ public:
 	void initCapacitor(float C);
 	void initInductor(float L);
 	void initV(float V, float phi);															  // Voltage source
-	void initC(float C, float phi);															  // Current source
-	void initVCV(int firstControllingNodeID, int secondControllingNodeID, float factor);	  // Voltage controlled voltage source
-	void initVCC(int firstControllingNodeID, int secondControllingNodeID, float factor);	  // Voltage controlled current source
-	void initCCV(string controllingElementID, float factor);								  // Current controlled voltage source
-	void initCCC(string controllingElementID, float factor);								  // Current controlled current source
+	//void initC(float C, float phi);															  // Current source
+	//void initVCV(int firstControllingNodeID, int secondControllingNodeID, float factor);	  // Voltage controlled voltage source
+	//void initVCC(int firstControllingNodeID, int secondControllingNodeID, float factor);	  // Voltage controlled current source
+	//void initCCV(string controllingElementID, float factor);								  // Current controlled voltage source
+	//void initCCC(string controllingElementID, float factor);								  // Current controlled current source
 
-	complex<float> getCurrent();
+	//complex<float> getCurrent();
 
 	~Element();
 };

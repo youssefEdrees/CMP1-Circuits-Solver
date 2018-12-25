@@ -13,3 +13,22 @@ Element::~Element()
 {
 
 }
+
+void Element::initResistor(float R) {
+	type = ElementType::R;
+	value = (R, 0);
+}
+
+void Element::initCapacitor(float C) {
+	type = ElementType::C;
+	//value = (0, -(1 / omega * C));
+}
+
+void Element::initInductor(float L) {
+	type = ElementType::L;
+
+}
+
+void Element::initV(float V, float phi) {
+
+}

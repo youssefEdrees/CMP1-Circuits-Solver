@@ -5,12 +5,12 @@ enum ElementType
 	R, 
 	L, 
 	C, 
-	V,   // Voltage source
-	C,   // Current source
-	VCV, // Voltage controlled voltage source
-	VCC, // Voltage controlled current source
-	CCV, // Current controlled voltage source
-	CCC  // Current controlled current source
+	VS,   // Voltage source
+	CS,   // Current source
+	VCVS, // Voltage controlled voltage source
+	VCCS, // Voltage controlled current source
+	CCVS, // Current controlled voltage source
+	CCCS  // Current controlled current source
 
 	/*Passive, 
 	Active*/
