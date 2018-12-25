@@ -22,7 +22,9 @@ ElementType Element::getType() {
 	return type;
 	
 }
-
+complex<float> Element::getValue() {
+	return value;
+}
 void Element::initResistor(float R, float frequency) {
 	type = ElementType::R;
 	value = (R, 0);
@@ -36,6 +38,14 @@ void Element::initCapacitor(float C, float frequency) {
 void Element::initInductor(float L, float frequency) {
 	type = ElementType::L;
 	value = (0, 2 * PI * frequency * L);
+}
+
+int Element::getFirstNode() {
+	return node1;
+
+}
+int Element::getSecondNode() {
+	return node2;
 }
 
 void Element::initVS(float V, float phi, float frequency) {

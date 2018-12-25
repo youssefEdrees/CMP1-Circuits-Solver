@@ -24,9 +24,11 @@ Element * Solver::getVSs(int size)
 }
 
 float Solver::SumOfZConnected(int node) {
+	complex<float>sum;
 	for (int i = 0; i < elementsCount;i++) {
 		if (isPassive(i)) {
-			if(elements[i])
+			if (elements[i]->getFirstNode() == node)
+				sum += 1 / elements[i]->getValue();
 		
 		}
 		
@@ -36,6 +38,14 @@ float Solver::SumOfZConnected(int node) {
 
 
 }
+
+int & Solver::getElementsCountByRef() {
+	return elementsCount;
+}
+int & Solver::getVCByRef() {
+	return VSCount;
+}
+
 
 void Solver::firstSquare() {
 	int nodesCount = 0;
