@@ -14,6 +14,9 @@ using namespace std;
 class Utility
 {
 	Utility();
+
+	static void translateLine(string words[], float freq);
+
 public:
 
 	//static string fileDialog();
