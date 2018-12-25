@@ -46,6 +46,9 @@ public:
 	void initVCCS(int firstControllingNode, int secondControllingNode, float factor);// Voltage controlled current source
 	void initCCVS(string controllingElementID, float factor);							  // Current controlled voltage source
 	void initCCCS(string controllingElementID, float factor);							  // Current controlled current source
+	int getFirstNode();
+	int getSecondNode();
+	complex<float> getValue();
 
 	complex<float> getCurrent();
 	ElementType getType();
