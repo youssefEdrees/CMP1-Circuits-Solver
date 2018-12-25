@@ -24,7 +24,12 @@ int main()
 		/// 2- Load the file.
 		string path;
 		cin >> path;
-		Utility::load(path, s->getElements(), s->getVSs());
+		Utility::load(path, 
+			s->getNumOfNodesByRef(), 
+			s->getElements(),
+			s->getElementsCountByRef(), 
+			s->getVSs(), 
+			s->getVCByRef());
 
 		/// 3- Instanciate a new solver.
 		if (s != NULL) delete s;

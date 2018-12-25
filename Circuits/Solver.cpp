@@ -11,16 +11,14 @@ Solver::Solver()
 	
 }
 
-Element * Solver::getElements(int  size)
+Element ** Solver::getElements()
 {
-	elementsCount = size;
-	return elements[0];
+	return &elements[0];
 }
 
-Element * Solver::getVSs(int size)
+Element ** Solver::getVSs()
 {
-	VSCount = size;
-	return voltageSources[0];
+	return &voltageSources[0];
 }
 
 complex<float> Solver::SumOfZConnected(int node) {
@@ -78,6 +76,11 @@ bool Solver::isPassive(int i) {
 		return true;
 	else
 		return false;
+}
+
+int & Solver::getNumOfNodesByRef()
+{
+	return numOfNodes;
 }
 
 int Solver::getElementsCount() {

@@ -15,13 +15,23 @@ class Utility
 {
 	Utility();
 
-	static void translateLine(string words[], float freq);
+	static void translateLine(string words[],
+		float freq,
+		Element ** elements,
+		int& sizeOfElements,
+		Element ** voltageSources,
+		int& sizeOfVoltageSources);
 
 public:
 
 	//static string fileDialog();
 
-	static void load(string path, vector<Element> * elements, vector<Element> * voltageSources);
+	static void load(string path, 
+		int& numOfNodes, 
+		Element ** elements,
+		int& sizeOfElements,
+		Element ** voltageSources,
+		int& sizeOfVoltageSources);
 
 	~Utility();
 };
